@@ -1,0 +1,136 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href='${path}/resources/css/marketList.css' rel='stylesheet' />
+<title>Insert title here</title>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String user = String.valueOf(session.getAttribute("member"));
+%>
+</head>
+
+<body>
+
+	<div id="wrap">
+		<header class="header">
+			<div class="logo"><a href="/../rice/main.do"><img src="${path}/resources/images/babpoollogo5.png"></a></div>
+			<nav class="nav">
+				<li><a href="#calendar-title">약속 잡기</a></li>
+				<li><a href="free/freeBoardList.do">자유게시판</a></li>
+				<li><a href="market/marketList.do">장터</a></li>
+				<li><a href="notice/noticeList.do">공지사항</a></li>
+				<c:if test="${member != null }">
+					<li><a href="../mypage.do" id="myPage">마이페이지</a></li>
+					<li><a href="../logOut.do">로그아웃</a></li>
+				</c:if>
+				<c:if test="${member == null }">
+					<li><a onclick="../myPageLogin()" id="myPage">마이페이지</a></li>
+					<li><a href="../loginPage.do">로그인</a></li>
+				</c:if>
+			</nav>
+		</header>
+
+		<section class="content">
+
+			<section class="notice">
+				<div class="page-title">
+					<div class="container">
+						<h3>장터</h3>
+					</div>
+				</div>
+
+				<!-- board seach area -->
+				<div id="board-search">
+					<div class="container">
+						<div class="search-window">
+								<form name="search" action="marketList.do" method="post">
+									<input type="hidden" name="curPage" value="${search.curPage }">
+									<input type="hidden" name="rowSizePerPage" value="${search.rowSizePerPage }">
+									<div class="search-wrap">
+										<label for="search" class="blind">장터 내용 검색</label> <input
+											id="search" type="search" name="searchWord"
+											placeholder="검색어를 입력해주세요." value="">
+										<button type="submit" class="btn btn-dark">검색</button>
+									</div>
+								</form>
+						</div>
+					</div>
+				</div>
+
+				<!-- board list area -->
+				<div id="market-list">
+					<div class="container">
+
+						<div class="market-content-list">
+							<c:forEach items="${marketList}" var="market">
+								<ul id="market-content">
+									<li><a href="marketView.do?marketNo=${market.marketNo }" class="content"><span
+											class="content_photo">
+										<img src="${path}/market/marketImage.do?fileName=${market.attaches.get(0).atchName}" width="186" height="186">
+												</span></a>
+										<div class="title">
+											<a href="marketView.do?marketNo=${market.marketNo }">${market.marketTitle }</a>
+										</div>
+										<div class="writer">${market.marketNickname }</div>
+										<div class="price">${market.marketPrice }원</div>
+										<div class="date">${market.marketRegDate }</div></li>
+								</ul>
+							</c:forEach>
+						</div>
+						<a href="marketForm.do" class="btn btn-dark"
+							id="write-button">글쓰기</a>
+					</div>
+				</div>
+				<div class="page_wrap">
+					<div class="page_nation">
+						<a class="arrow pprev" href="marketList.do?curPage=1"></a> <a
+							class="arrow prev"
+							href="marketList.do?curPage=${search.curPage-1 }"></a>
+						<c:forEach begin="${search.firstPage }" end="${search.lastPage }"
+							var="i">
+							<a href="marketList.do?curPage=${i }"> <c:if
+									test="${i eq search.curPage }">
+									<span style="font-weight: bold"> ${i } </span>
+								</c:if> <c:if test="${i ne search.curPage }">  ${i } </c:if>
+							</a>
+						</c:forEach>
+						<a class="arrow next"
+							href="marketList.do?curPage=${search.curPage+1 }"></a> <a
+							class="arrow nnext"
+							href="marketList.do?curPage=${search.totalPageCount }"></a>
+					</div>
+				</div>
+			</section>
+		</section>
+	</div>
+
+
+	<footer class="footer">
+		<div class="footercontent">
+			<div class="sns_section">
+				<a type="button" class="instagrem" href="https://www.instagram.com/"
+					target="_blank"><img
+					src="${path}/resources/images/instagram.png" width="20px"
+					height="20px"> </a> <a type="button" class="facebook"
+					href="https://ko-kr.facebook.com/" target="_blank"><img
+					src="${path}/resources/images/facebook.png" width="20px"
+					height="20px"> </a> <a type="button" class="twitter"
+					href="https://twitter.com/?lang=ko" target="_blank"><img
+					src="${path}/resources/images/twitter.png" width="20px"
+					height="20px"> </a>
+			</div>
+			<div class="footeraddr">
+				<div class="logo_title">밥풀</div>
+				<p>(34856) 넥스트 IT 교육센터 대전광역시 중구 계룡로 825 (용두동, 희영빌딩 2층)</p>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

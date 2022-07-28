@@ -1,0 +1,56 @@
+package com.babpool.food.web;
+
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.babpool.common.vo.SearchVO;
+import com.babpool.food.dao.IRecommendDao;
+import com.babpool.food.vo.FoodVO;
+import com.babpool.food.vo.RecommendVO;
+import com.babpool.member.vo.MemberVO;
+
+@Controller
+public class RecommendController {
+
+	
+	@Inject
+	IRecommendDao recommendDao;
+	
+	
+	@RequestMapping("/recommend.do")
+	public String recommendList(Model model, @ModelAttribute("searchVO") SearchVO searchVO) throws Exception {
+		int totalRowCount = recommendDao.getTotalRowCount(searchVO);
+		searchVO.setTotalRowCount(totalRowCount);
+		searchVO.pageSetting();
+		
+		
+		List<FoodVO> recommendList = recommendDao.getRecommendList(searchVO);
+		model.addAttribute("recommendList", recommendList);
+		
+		return "recommend/recommend";
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value ="/recommendRegist.do")
+	public String recommendRegist(RecommendVO recommend, HttpSession session)throws Exception{
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		
+		if(member != null) {
+			recommendDao.insertRecommend(recommend);
+			return "success";
+		}else {
+			return "false";
+		}
+		
+		
+	}
+}

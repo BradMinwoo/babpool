@@ -1,0 +1,198 @@
+* {
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    color: black;
+    font-family: 'Jua', sans-serif;
+}
+
+#wrap {
+	 margin: 0 auto;
+    width: 1600px;
+    height: 100%;
+}
+
+/* header */
+header {
+	width: 1600px;
+	z-index: 100;
+	height: 180px;
+	background-color: white;
+}
+
+.info {
+  position: relative;
+  left: 1200px;
+  display: flex;
+  width: 200px;
+  top: 20px;
+}
+
+.info > li {
+  color: gray;
+  padding: 10px;
+}
+
+.logo {
+	width: 200px;
+	float: left;
+	position: relative;
+   left: 170px;
+   top: 15px;
+}
+
+#wrap .nav {
+	width: 1200px;
+	display: flex;
+}
+
+#wrap .nav li a {
+	z-index: 100px;
+	position: relative;
+	left: 300px;
+	font-size: 20px;
+	list-style: none;
+	text-decoration: none;
+	padding: 30px;
+	line-height: 200px;
+}
+
+/* header e */
+
+.content {
+    clear: both;
+    padding: 80px 0;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0 auto;
+}
+
+#div_table {
+    text-align: center;
+    font-size: 15px;
+}
+
+#div_table th,
+#div_table td {
+    padding: 14px 0;
+}
+
+#div_table tbody td {
+    border-bottom: 1px solid #adadad;
+    text-align: center;
+}
+
+#div_table tbody th {
+    padding-left: 28px;
+    padding-right: 14px;
+    border-top: 1px solid #e7e7e7;
+    text-align: left;
+}
+
+#div_table tbody th p {
+    display: none;
+}
+
+#div_table .td_left {
+    background-color: #e7e7e7;
+    text-align: center;
+    font-weight: bold;
+}
+
+.td_right > input {
+    font-size: 18px;
+    width: 800px;
+    height: 25px;
+    border: none;
+    padding: 10px;
+}
+
+.form-control {
+    padding-left: 10px;
+}
+
+.td_right > textarea {
+    padding: 10px;
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
+    border: none;
+    font-size: 18px;
+}
+
+#div_button {
+    height: 100px;
+    margin-top: 150px;
+    margin-right: 200px;
+}
+
+#div_button input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    position: relative;
+    bottom: 100px;
+    font-size: 15px;
+}
+
+#div_button {
+    text-align: right;
+}
+
+#file_title,
+#file_area>input {
+    border-bottom: none;
+}
+
+.form-inline {
+    float: left;
+}
+
+/* 버튼 액션추가 */
+#div_button>input:active {
+    transform: translate(2px, 2px);
+}
+
+
+/* footer */
+.footer {
+    height: 150px;
+    background-color: #FEF5ED;
+}
+
+.footercontent {
+    left: 300px;
+}
+
+.logo_title {
+    position: relative;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.footeraddr {
+    position: relative;
+    font-size: 15px;
+    top: 50px;
+    text-align: center;
+}
+
+.footeraddr>p {
+    margin-top: 15px;
+}
+
+.sns_section {
+    position: relative;
+    text-align: center;
+    top: 30px;
+}
+
+.sns_section>a {
+    margin-left: 10px;
+}
+
+/* footer e */

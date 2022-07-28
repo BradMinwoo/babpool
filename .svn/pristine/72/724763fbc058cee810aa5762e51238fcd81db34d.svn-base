@@ -1,0 +1,19 @@
+package com.babpool.member.service;
+
+import java.util.List;
+
+import com.babpool.free.vo.FreeBoardVO;
+import com.babpool.market.vo.MarketVO;
+import com.babpool.member.vo.FavoriteMemberVO;
+import com.babpool.member.vo.MemberVO;
+import com.babpool.member.vo.MyPageVO;
+
+public interface IMypageService {
+	
+	public List<MarketVO> getmyMarketList(MyPageVO mypage, MemberVO member);
+	public List<FreeBoardVO> getmyFreeBoardList(MyPageVO mypage, MemberVO member);
+	public List<FavoriteMemberVO> getmyFavMemList(MemberVO member);
+	
+	
+	
+}

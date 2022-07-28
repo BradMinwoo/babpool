@@ -1,0 +1,53 @@
+package com.babpool.member.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.babpool.free.vo.FreeBoardVO;
+import com.babpool.market.vo.MarketVO;
+import com.babpool.member.dao.MemberDao;
+import com.babpool.member.dao.MypageDao;
+import com.babpool.member.vo.FavoriteMemberVO;
+import com.babpool.member.vo.MemberVO;
+import com.babpool.member.vo.MyPageVO;
+
+@Service
+public class MypageServiceImpl implements IMypageService{
+	
+	@Autowired
+	MypageDao mypageDao;
+
+	@Override
+	public List<MarketVO> getmyMarketList(MyPageVO mypage, MemberVO member) {
+		mypage.setMemNickname(member.getMemNickname());
+		int marketTotal = mypageDao.getMarketTotal(mypage);
+		mypage.setTotalRowCount(marketTotal);
+		mypage.setRowSizePerPage(5);
+		mypage.pageSetting();
+		List<MarketVO> marketList = mypageDao.getmyMarket(mypage);
+		return marketList;
+	}
+
+	@Override
+	public List<FreeBoardVO> getmyFreeBoardList(MyPageVO mypage, MemberVO member) {
+		mypage.setMemNickname(member.getMemNickname());
+		int myFreeBoardTotal = mypageDao.getFreeBoardTotal(mypage);
+		mypage.setTotalRowCount(myFreeBoardTotal);
+		mypage.setRowSizePerPage(5);
+		mypage.pageSetting();
+		List<FreeBoardVO> myFreeBoardList = mypageDao.getmyFreeBoard(mypage);
+		return myFreeBoardList;
+	}
+
+	@Override
+	public List<FavoriteMemberVO> getmyFavMemList(MemberVO member) {
+		String memId = member.getMemId();
+		List<FavoriteMemberVO> favmemList = mypageDao.getFavoritemember(memId);
+		return favmemList;
+	}
+	
+	
+
+}

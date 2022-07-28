@@ -1,0 +1,71 @@
+package com.babpool.notice.web;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.babpool.common.vo.SearchVO;
+import com.babpool.notice.service.INoticeService;
+import com.babpool.notice.vo.NoticeSearchVO;
+import com.babpool.notice.vo.NoticeVO;
+
+@Controller
+public class NoticeController {
+	
+	@Inject
+	INoticeService noticeService;
+	
+	@RequestMapping(value = "/notice/noticeList.do")
+	public String NoticeList(Model model, @ModelAttribute("searchVO")SearchVO searchVO) throws Exception{
+		List<NoticeVO> noticeList = noticeService.getNoticeList(searchVO);
+		model.addAttribute("noticeList", noticeList);
+		return "notice/noticeList";
+	}
+	
+	
+	@RequestMapping(value = "/notice/noticeView.do")
+	public String noticeView(Model model, int noticeNo) {
+		NoticeVO notice = noticeService.getNotice(noticeNo);
+		model.addAttribute("notice", notice);
+		return "notice/noticeView";
+	}
+	
+	
+	@RequestMapping(value="/notice/noticeEdit.do")
+	public String noticeEdit(Model model, int noticeNo) {
+		NoticeVO notice = noticeService.getNotice(noticeNo);
+		model.addAttribute("notice", notice);
+		return "notice/noticeEdit";
+	}
+	
+	@RequestMapping(value = "/notice/noticeModify.do")
+	public String noticeModify(Model model, @ModelAttribute("notice")NoticeVO notice) {
+		noticeService.updateNotice(notice);
+		System.out.println(notice);
+		return "notice/noticeModify";
+	}
+	
+	@RequestMapping(value = "/notice/noticeDelete.do")
+	public String noticeDelete(Model model, @ModelAttribute("notice")NoticeVO notice) {
+		noticeService.deleteNotice(notice);
+		return "notice/noticeDelete";
+	}
+	
+	@RequestMapping(value = "/notice/noticeForm.do")
+	public String noticeForm() {
+		
+		return "notice/noticeForm";
+	}
+	
+	@RequestMapping(value = "/notice/noticeRegist.do")
+	public String noticeRegist(Model model, @ModelAttribute("notice")NoticeVO notice) {
+		noticeService.insertNotice(notice);
+		return "notice/noticeRegist";
+	}
+	
+}

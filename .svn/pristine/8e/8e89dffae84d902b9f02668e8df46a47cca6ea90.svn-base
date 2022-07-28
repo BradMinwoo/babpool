@@ -1,0 +1,68 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>밥풀</title>
+	<link href='${path}/resources/css/faq.css' rel='stylesheet' />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+	rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+<%request.setCharacterEncoding("UTF-8");%>
+</head>
+<script>
+
+
+    $('.accoArea').ready(function () {
+	$('.accTit').on('click', function () {
+		if ($(this).hasClass('on')) {
+			slideUp(200);
+		} else {
+			slideUp();
+			$(this).addClass('on').next().slideDown(200);
+		}
+		function slideUp() {
+			$('.accTit').removeClass('on').next().slideUp(200);
+		};
+	});
+});
+
+</script>
+<body>
+<div id="wrap">
+	<section class="content">
+		<%@include file="/WEB-INF/inc/header.jsp" %>
+
+      <div class="content_title">
+        FAQ
+      </div>
+      
+      <div class="accoArea">
+      	<c:forEach items="${faqList }" var="faq">
+        <a href="#url" class="accTit">
+        <img src="${path}/resources/images/qna_q.png" width="25px" height="25px">
+        ${faq.faqQuestion }</a>
+        <div class="accBox">
+          <ul>
+            <li>
+            <img src="${path}/resources/images/qna_a.png" width="25px" height="25px">
+            ${faq.faqAnswer }</li>
+          </ul>
+        </div>
+        </c:forEach>
+      </div>
+      
+      
+    </section>
+    </div>
+   <%@include file="/WEB-INF/inc/footer.jsp" %>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.babpool.main.dao.ICalendarDao">
+
+	<select id="getCalendarList"
+		resultType="com.babpool.main.vo.CalendarVO">
+		select * from calendar
+		where cal_del_yn = 'N'
+	</select>
+	
+	<select id="getScheduleList"
+		resultType="com.babpool.main.vo.CalendarVO">
+		 select cal_title, cal_nick, to_char(cal_start, 'YYYY/MM/DD') as cal_start
+       from calendar
+		 where cal_start between sysdate and sysdate + 3
+		 and cal_del_yn = 'N'
+		 order by cal_start desc
+	</select>
+	
+	<insert id="toCalendarList" parameterType="com.babpool.main.vo.CalendarVO">
+		INSERT INTO calendar (
+	    cal_no, cal_title, cal_nick
+	    , cal_start, cal_end, cal_color, cal_people
+	    , cal_del_yn, cal_id 
+		) VALUES (
+			calendar_seq.nextval, #{calTitle}, #{calNick}
+		 , #{calStart}, #{calEnd}, 'Orange', #{calPeople}
+		 , 'N', #{calId} 
+		)
+	</insert>	
+	
+	<update id="deleteCalendar" parameterType="com.babpool.main.vo.CalendarVO">
+	update calendar
+	set cal_del_yn = 'Y'
+	WHERE cal_id = #{calId}
+	</update>
+	
+	<update id="updateCalendar" parameterType="com.babpool.main.vo.CalendarVO">
+	update calendar
+	set cal_title = #{calTitle}
+		,cal_start = #{calStart}
+		,cal_end = #{calEnd}
+		,cal_people = #{calPeople}
+	WHERE cal_id = #{calId}
+	</update>
+	
+</mapper>

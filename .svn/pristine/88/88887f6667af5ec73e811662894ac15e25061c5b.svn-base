@@ -1,0 +1,40 @@
+/* footer */
+.footer {
+	clear: both;
+	height: 150px;
+	background-color: #FEF5ED;
+}
+
+.footercontent {
+	left: 300px;
+}
+
+.logo_title {
+	position: relative;
+	font-size: 25px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.footeraddr {
+	position: relative;
+	font-size: 15px;
+	top: 50px;
+	text-align: center;
+}
+
+.footeraddr>p {
+	margin-top: 15px;
+}
+
+.sns_section {
+	position: relative;
+	text-align: center;
+	top: 30px;
+}
+
+.sns_section>a {
+	margin-left: 10px;
+}
+
+/* footer e */

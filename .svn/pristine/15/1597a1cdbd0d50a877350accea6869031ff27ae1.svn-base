@@ -1,0 +1,11 @@
+package com.babpool.free.service;
+
+
+import com.babpool.free.vo.FreeBoardVO;
+
+public interface IFreeBoardService {
+
+	public FreeBoardVO getBoard(int freeBoardNo);
+	
+	public void modifyBoard(FreeBoardVO freeBoard);
+}

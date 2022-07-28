@@ -1,0 +1,388 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+   	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/> 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<%request.setCharacterEncoding("UTF-8"); %>
+	<link rel="stylesheet" type="text/css" href="${path}/resources/css/mypage.css">
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
+	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<script type="text/javascript">
+	$(document).ready(function(){
+		if(${member == null}){
+			alert("로그인이 필요합니다!")
+			location.replace("loginPage.do");
+		}
+	});
+</script>
+<body>
+        <div class="wrap">
+            <div class="greenContainer">
+              <div class="profile_area">
+                <div class="box" style="background: #BDBDBD;">
+                	 	<c:if test="${member.memProfile == '프사'}">
+                    		<img class="profile" src="${path}/resources/images/profile/profiledefault.png">
+                    	</c:if>
+                    	<c:if test="${member.memProfile != '프사'}">
+							<img class="profile" src="/profileimg/${member.memProfile}">
+						</c:if>
+                </div>
+                <div class="name">
+                	  <c:if test="${member.memManager == 'y' }">
+                    	[관리자]&nbsp;${member.memNickname }님 안녕하세요!<br>
+                    </c:if>
+                     <c:if test="${member.memManager != 'y' }">
+                      ${member.memNickname }님 안녕하세요!<br>
+                		</c:if>
+                    <img class="jumsu" src="${path}/resources/images/profile/babpool_image.png" width="90" height="70"> 
+                    <div class="avg">
+                    ${member.memLevel }&nbsp;/&nbsp;10&nbsp;점
+                    </div>
+                </div>
+                <form action="upload.do" method="post" id="uploadId" enctype="multipart/form-data">
+	                <div class="profileimg">
+		                <input type='file' accept='image/jpg,image/png,image/jpeg,image/gif' name="profileimg" id='profileimg'/>
+		                <label for='profileimg' id='profileimg_label'><i class="far fa-file-image"></i>사진 선택</label>
+	                </div>
+                </form>
+                <form action="upload.do" method="post" id="uploadId" enctype="multipart/form-data">
+	                <div class="profile_upload">
+		                <input type='button' accept='image/jpg,image/png,image/jpeg,image/gif' id='upload'/>
+		                <label for='upload'><i class="far fa-file-image"></i>적용</label>
+                	  </div>
+                </form>
+                <c:if test="${member.memManager == 'y' }">
+	                <div class="management">
+		                <input type='button' onclick="window.open('memberlist.do')" id='management'/>
+		                <label for='management'><i class="far fa-file-image"></i>회원 관리</label>
+                	  </div>
+                </c:if>
+                <div class="pwchange">
+		                <input type='button' onclick="location.href='pwchangepage.do'" id='pwchangebtn'/>
+		                <label for='pwchangebtn'><i class="far fa-file-image"></i>비밀번호 변경</label>
+                	  </div>
+                <!-- <div class="babpool">밥풀갯수</div> -->
+              </div>    
+              <!-- <div class="second_box" style="background: ;"> -->
+
+
+              </div>  
+            </div>
+            <div class="summaryContainer">
+              <div class="profiles">
+                  <div class="title">내 프로필</div>
+                  <table class="table">
+                    <tr>
+                      <td><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;${member.memName }
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;${member.memEmail }
+                      </td>
+                    </tr>
+                    <tr>
+                      <td id="phoneedit"><span class="glyphicon glyphicon-phone" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;${member.memPhone }
+                     	<button type="button" class="btn btn-default" id="phonebtn">수정</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td id ="likeedit"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;${member.memFoodCode }
+                        <button type="button" class="btn btn-default" id="likebtn">수정</button>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="profiles">
+                  <div class="title">관심 회원</div>
+                  <table class="table">
+                    <tr>
+                      <td>
+                        <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;asdf1234
+                        <button type="button" class="btn btn-default" id="fix">삭제</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;yht1432
+                        <button type="button" class="btn btn-default" id="fix">삭제</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;btrg43
+                        <button type="button" class="btn btn-default" id="fix">삭제</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;iuk43
+                        <button type="button" class="btn btn-default" id="fix">삭제</button>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="profiles">
+                  <div class="title">차단 회원</div>
+                  <table class="table">
+                    <tr>
+                      <td>
+                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;asdf1234
+                        <button type="button" class="btn btn-default" id="fix">삭제</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;yht1432
+                        <button type="button" class="btn btn-default" id="fix">삭제</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;btrg43
+                        <button type="button" class="btn btn-default" id="fix">삭제</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>&nbsp;&nbsp;&nbsp;iuk43
+                        <button type="button" class="btn btn-default" id="fix">삭제</button>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+            </div>  
+            <div class="summaryContainer">
+              <div class="profiles">
+                <div class="title"> 내가 쓴 글</div>
+                <table class="table table-striped">
+                  <th>글 제목</th>
+                  <th>작성 일자</th>
+                  <th>게시판</th>
+                  <tr>
+                    <td>내가 쓴 글이에옹애옹</td>
+                    <td>2022.07.01</td>
+                    <td>자유게시판</td>
+                  </tr>
+                  <tr>
+                    <td>내가 쓴 글이에옹애옹2</td>
+                    <td>2022.07.01</td>
+                    <td>장터</td>
+                  </tr>
+                  <tr>
+                    <td>내가 쓴 글이에옹애옹3</td>
+                    <td>2022.07.01</td>
+                    <td>자유게시판</td>
+                  </tr>
+                  <tr>
+                    <td>내가 쓴 글이에옹애옹4</td>
+                    <td>2022.07.01</td>
+                    <td>자유게시판</td>
+                  </tr>
+                  <tr>
+                    <td>내가 쓴 글이에옹애옹5</td>
+                    <td>2022.07.01</td>
+                    <td>자유게시판</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div class="profiles">
+                <div class="title"> 내 문의 글</div>
+                  <table class="table table-striped">
+                    <th>문의 내용</th>
+                    <th>작성 일자</th>
+                    <tr>
+                      <td>않이 외 않되요?</td>
+                      <td>2022.07.01</td>
+                    </tr>
+                  </table>
+                </div>
+
+
+                    
+            </div>  
+            <div class="infoContainer">
+              <a href="#" class="item">
+                <div>icon</div>
+                <div>공지사항</div>
+              </a>    
+              <a href="main.do" class="item">
+                <div>main</div>
+                <div>메인화면</div>
+              </a>    
+              <a href="#" class="item">
+                <div>icon</div>
+                <div>고객센터</div>
+              </a>
+            </div>
+          </div>
+    </body>
+
+<script>
+
+function autoHypenTel(str) {
+	  str = str.replace(/[^0-9]/g, '');
+	  var tmp = '';
+
+	  if (str.substring(0, 2) == 02) {
+	    // 서울 전화번호일 경우 10자리까지만 나타나고 그 이상의 자리수는 자동삭제
+	    if (str.length < 3) {
+	      return str;
+	    } else if (str.length < 6) {
+	      tmp += str.substr(0, 2);
+	      tmp += '-';
+	      tmp += str.substr(2);
+	      return tmp;
+	    } else if (str.length < 10) {
+	      tmp += str.substr(0, 2);
+	      tmp += '-';
+	      tmp += str.substr(2, 3);
+	      tmp += '-';
+	      tmp += str.substr(5);
+	      return tmp;
+	    } else {
+	      tmp += str.substr(0, 2);
+	      tmp += '-';
+	      tmp += str.substr(2, 4);
+	      tmp += '-';
+	      tmp += str.substr(6, 4);
+	      return tmp;
+	    }
+	  } else {
+	    // 핸드폰 및 다른 지역 전화번호 일 경우
+	    if (str.length < 4) {
+	      return str;
+	    } else if (str.length < 7) {
+	      tmp += str.substr(0, 3);
+	      tmp += '-';
+	      tmp += str.substr(3);
+	      return tmp;
+	    } else if (str.length < 11) {
+	      tmp += str.substr(0, 3);
+	      tmp += '-';
+	      tmp += str.substr(3, 3);
+	      tmp += '-';
+	      tmp += str.substr(6);
+	      return tmp;
+	    } else {
+	      tmp += str.substr(0, 3);
+	      tmp += '-';
+	      tmp += str.substr(3, 4);
+	      tmp += '-';
+	      tmp += str.substr(7);
+	      return tmp;
+	    }
+	  }
+
+	  return str;
+	}
+
+
+
+</script>
+
+
+
+<script type="text/javascript">
+	
+
+	$("#upload").on("click",function(e){
+		var fileCheck = document.getElementById("profileimg").value;
+		if(!fileCheck){
+			alert("사진을 선택 후 적용 버튼을 눌러주세요!");
+		}else{
+			$("#uploadId").submit();
+			alert("프로필 사진이 변경되었습니다!");
+		}
+		
+	});//upload
+	
+	$("#profileimg").on("change",function(e){
+		$("#profileimg_label").text("다시 선택");
+	});
+	
+	$("#likebtn").on("click", function(e){
+		$("#likeedit").empty();
+		$("#likeedit").prepend("<span class='glyphicon glyphicon-heart' aria-hidden='true'></span>&nbsp;&nbsp;&nbsp;");
+		$("#likeedit").append("<select class='form-control' name='memFoodCode' id='likefood' required></select>");
+		$("#likeedit").append("<button type='button' class='btn btn-default' id='likefix'>완료</button>");
+			$("#likefood").append("<option value=''>좋아하는 음식 선택</option>");
+			$("#likefood").append("<option value='한식'>한식</option>");
+			$("#likefood").append("<option value='중식'>중식</option>");
+			$("#likefood").append("<option value='일식'>일식</option>");
+			$("#likefood").append("<option value='양식'>양식</option>");
+			$("#likefood").append("<option value='분식'>분식</option>");
+	});//likebtn
+	
+	$("#phonebtn").on("click", function(e){
+		$("#phoneedit").empty();
+		$("#phoneedit").prepend("<span class='glyphicon glyphicon-phone' aria-hidden='true'></span>&nbsp;&nbsp;&nbsp;");
+		$("#phoneedit").append("<input type='text' id='mem_phone' name='memPhone' class='form-control' autocomplete='off' value='' pattern='[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}' placeholder='휴대폰' maxlength='13' required>");
+		$("#phoneedit").append("<button type='button' class='btn btn-default' id='phonefix'>완료</button>");
+	});//phonebtn
+	
+	$(document).on("click","#likefix" ,function(e){
+		console.log("likefix 눌림");
+		$.ajax({
+			url : "<c:url value='likeedit.do'/>"
+		  ,type : "POST"
+		  ,data : {"like" : $("#likefood").val(), "id" : "${member.memId}"}
+		  ,success : function(data){
+			  if(data == "success"){
+				  alert("변경이 완료되었습니다!");
+				  location.reload();
+			  }else if(data == "empty"){
+				  alert("선택 후에 완료를 눌러주세요!");
+			  }else{
+				  alert("오류");
+			  }
+		  },error : function(req){
+			  alert("에러");
+		  }
+			
+		});//ajax
+		
+	});//likefix
+	
+	$(document).on("click","#phonefix" ,function(e){
+		console.log("phonefix 눌림");
+		$.ajax({
+			url : "<c:url value='phoneedit.do'/>"
+		  ,type : "POST"
+		  ,data : {"phone" : $("#mem_phone").val(), "id" : "${member.memId}"}
+		  ,success : function(data){
+			  if(data == "success"){
+				  alert("변경이 완료되었습니다!");
+				  location.reload();
+			  }else if(data == "empty"){
+				  alert("입력 후에 완료를 눌러주세요!");
+			  }else{
+				  alert("오류");
+			  }
+		  },error : function(req){
+			  alert("에러");
+		  }
+			
+		});//ajax
+		
+	});//likefix
+	
+	$(document).on("keyup","#mem_phone", function(event){
+		  event = event || window.event;
+		  var _val = this.value.trim();
+		  this.value = autoHypenTel(_val);
+	});
+
+
+</script>
+</html>

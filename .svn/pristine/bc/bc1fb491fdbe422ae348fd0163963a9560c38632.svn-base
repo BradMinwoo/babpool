@@ -1,0 +1,140 @@
+* {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+	color: black;
+   font-family: 'Jua', sans-serif;
+}
+
+#wrap {
+	margin: 0 auto;
+	width: 1600px;
+	height: 100%;
+}
+
+/* header */
+header {
+	width: 1600px;
+	height: 180px;
+	background-color: white;
+}
+
+.info {
+  position: relative;
+  left: 1200px;
+  display: flex;
+  width: 200px;
+  top: 20px;
+}
+
+.info > li {
+  color: gray;
+  padding: 10px;
+}
+
+.logo {
+	width: 200px;
+	float: left;
+	position: relative;
+   left: 170px;
+   top: 15px;
+}
+
+#wrap .nav {
+	width: 1200px;
+	display: flex;
+}
+
+#wrap .nav li a {
+	z-index: 100px;
+	position: relative;
+	left: 300px;
+	font-size: 20px;
+	list-style: none;
+	text-decoration: none;
+	padding: 30px;
+	line-height: 200px;
+}
+/* header e */
+
+  /* content */
+  
+ .content {
+  clear: both;
+  width: 100%;
+}
+  
+.page_title {
+  margin-bottom: 60px;
+}
+
+.page_title h3 {
+  font-size: 28px;
+  color: #333333;
+  font-weight: 400;
+  text-align: center;
+}
+
+section.content {
+  padding: 80px 0;
+}
+  
+  .accoArea {
+    width: 800px;
+    height: 300px;
+    margin: 0 auto;
+  }
+  
+  .accoArea{display:block;box-sizing:border-box; padding-top:50px; height:auto; overflow:hidden;}
+  .accoArea .accTit{display:block;background:url('../images/arrow_down.png') no-repeat 98% center; border-top:2px outset #333; margin-top:-1px;padding:10px 0;width:100%; font-size:25px;font-weight:500;text-indent:3%;color:#20253a;}
+  .accoArea .accTit.on{background:url('../images/arrow_up.png') no-repeat 98% center;}
+  .accoArea .accBox{display:none;}
+  .accoArea .accBox:last-child{border-bottom:2px outset #333;}
+  .accoArea .accBox ul{margin:0 auto;padding:10px 0;width:95%;}
+  .accoArea .accBox li{position:relative;padding-left:10px; margin-bottom:10px;font-size: 20px;}
+  /* .accoArea .accBox li:after{content:'';  position:absolute; top:7px; left:0; background:#999;border-radius:10px; width:5px;height:5px; font-size:15px;font-weight:300;} */
+  
+  /* content e */
+  
+  
+  /* footer */
+.footer {
+	clear: both;
+	height: 150px;
+	background-color: #FEF5ED;
+}
+
+.footercontent {
+	left: 300px;
+}
+
+.logo_title {
+	position: relative;
+	font-size: 25px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.footeraddr {
+	position: relative;
+	font-size: 15px;
+	top: 50px;
+	text-align: center;
+}
+
+.footeraddr>p {
+	margin-top: 15px;
+}
+
+.sns_section {
+	position: relative;
+	text-align: center;
+	top: 30px;
+}
+
+.sns_section>a {
+	margin-left: 10px;
+}
+
+/* footer e */

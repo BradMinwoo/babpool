@@ -1,0 +1,29 @@
+package com.babpool.free.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import com.babpool.attach.dao.IAttachDao;
+import com.babpool.attach.vo.AttachVO;
+import com.babpool.free.dao.IFreeBoardDao;
+import com.babpool.free.vo.FreeBoardVO;
+
+public class FreeBoardSeriveImpl {
+
+@Inject
+IFreeBoardDao freeBoardDao;
+
+@Inject
+IAttachDao attachDao;
+	
+	public FreeBoardVO getBoard(int freeBoardNo) {
+		FreeBoardVO freeBoard = freeBoardDao.getFreeBoard(freeBoardNo);
+		if(freeBoard == null) {
+			
+		}
+		List<AttachVO> attaches = attachDao.getAttachListByParent(freeBoardNo, "FREE");
+		freeBoard.setAttaches(attaches);
+		return freeBoard;
+	}
+}

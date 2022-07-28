@@ -1,0 +1,127 @@
+* {
+  margin: 0 auto;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+	color: black;
+  font-family: 'Jua', sans-serif;
+}
+
+#wrap {
+	width: 1600px;
+	height: 100%;
+}
+/* content */
+
+.content {
+  width: 1200px;
+  height: 1200px;
+  text-align: center;
+}
+
+.market_frame {
+  height: 500px;
+}
+
+.market_frame > img {
+  float: left;
+}
+
+.market_frame {
+  display: flex;
+}
+
+.content_title {
+  padding: 30px;
+  font-size: 40px;
+}
+
+.market_intro {
+  width: 700px;
+  text-align: left;
+}
+.market_content {
+  line-height: 60px;
+}
+
+.market_title {
+  font-size: 25px;
+}
+
+.market_price {
+  font-size: 40px;
+}
+
+.market_view {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: rgb(204, 204, 204);
+}
+
+.market_view > i {
+  color: rgb(204, 204, 204);
+  margin-left: 10px;
+}
+
+.market_profile {
+  font-size: 18px;
+  line-height: 40px;
+}
+
+.market_like > button {
+  width: 180px;
+  height: 50px;
+  border: 0;
+  font-size: 20px;
+  margin-right: 20px;
+  position: relative;
+  top: 50px;
+  color: white;
+  background: rgb(247, 0, 0);
+}
+
+.market_like i {
+  color: white;
+}
+
+.market_profile > p::before {
+  content:'';
+  display:inline-block;
+  width:3px;
+  height:3px;
+  margin:-5px 10px 0 0;
+  vertical-align:middle;
+  background: rgb(204, 204, 204);
+  border-radius:50%
+}
+
+.market_profile > p {
+	color: gray;
+}
+
+.market_like .like, .market_like .talk {
+  background: rgb(204, 204, 204);
+}
+
+.market_information > p {
+  font-size: 35px;
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.market_information > pre {
+  text-align: left;
+  font-size: 20px;
+}
+
+.market_like > button {
+	cursor: pointer;
+}
+
+.market_image > img:last-child {
+	display: none;
+}
+
+/* content e */

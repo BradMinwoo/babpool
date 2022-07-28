@@ -1,0 +1,81 @@
+* {
+	margin: 0 auto;
+	padding: 0;
+	list-style: none;
+	text-decoration: none;
+	color: black;
+	font-family: 'Jua', sans-serif;
+}
+
+#wrap {
+	width: 1600px;
+	height: 100%;
+}
+
+/* content */
+.content {
+	clear: both;
+	height: 700px;
+	width: 100%;
+}
+
+.content_title {
+  padding: 30px;
+  font-size: 40px;
+}
+
+.accoArea {
+	width: 800px;
+	height: 300px;
+	margin: 0 auto;
+}
+
+.accoArea {
+	display: block;
+	box-sizing: border-box;
+	padding-top: 50px;
+	height: auto;
+	overflow: hidden;
+}
+
+.accoArea .accTit {
+	display: block;
+	background: url('../images/arrow_down.png') no-repeat 98% center;
+	border-top: 2px outset #333;
+	margin-top: -1px;
+	padding: 10px 0;
+	width: 100%;
+	font-size: 20px;
+	font-weight: 500;
+	text-indent: 3%;
+	color: #20253a;
+}
+
+.accoArea .accTit.on {
+	background: url('../images/arrow_up.png') no-repeat 98% center;
+}
+
+.accoArea .accBox {
+	display: none;
+}
+
+.accoArea .accBox:last-child {
+	border-bottom: 2px outset #333;
+}
+
+.accoArea .accBox ul {
+	margin: 0 auto;
+	padding: 10px 0;
+	width: 95%;
+}
+
+.accoArea .accBox li {
+	position: relative;
+	padding-left: 10px;
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+/* .accoArea .accBox li:after{content:'';  position:absolute; top:7px; left:0; background:#999;border-radius:10px; width:5px;height:5px; font-size:15px;font-weight:300;} */
+
+/* content e */
+

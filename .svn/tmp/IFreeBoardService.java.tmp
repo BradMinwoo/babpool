@@ -1,0 +1,23 @@
+package com.babpool.free.service;
+
+
+<<<<<<< .mine
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+||||||| .r268
+=======
+
+>>>>>>> .r291
+import com.babpool.free.vo.FreeBoardVO;
+
+@Service
+public interface IFreeBoardService {
+	
+
+	public FreeBoardVO getBoard(int freeBoardNo);
+	
+	public void modifyBoard(FreeBoardVO freeBoard);
+	
+}

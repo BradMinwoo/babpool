@@ -1,0 +1,484 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib  prefix="form" uri="http://www.springframework.org/tags/form" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href='${path}/resources/css/boardWrite.css' rel='stylesheet' />
+
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+    <!-- jQuery -->
+<%--     <script src="<%=request.getContextPath() %>/resources/js/jquery1.11.2.js"></script> --%>
+
+<!-- 부트스트랩 css -->
+<link
+	href="<%=request.getContextPath()%>/resources/css/bootstrap-3.3.2/css/bootstrap.css"
+	rel="stylesheet">
+
+
+<!-- 부트스트랩 js -->
+<script
+	src="<%=request.getContextPath()%>/resources/css/bootstrap-3.3.2/js/bootstrap.js"></script>
+
+
+
+
+<title>게시판</title>
+
+</head>
+<%	request.setCharacterEncoding("utf-8");%>
+<body>
+${freeBoard}
+<div id="wrap">
+<<<<<<< .mine
+		<%@include file="/WEB-INF/inc/header.jsp" %>
+
+||||||| .r224
+=======
+		<header class="header">
+			<div class="logo">
+				<a href="/../rice/main.do"><img
+					src="${path}/resources/images/babpoollogo3.png"></a>
+			</div>
+			<nav class="nav">
+				<li><a href="../main.do">약속 잡기</a> </li>
+				<li><a href="../free/freeBoardList.do">자유게시판</a></li>
+				<li><a href="../rice/market/marketList.do">장터</a></li>
+				<li><a href="../rice/notice/noticeList.do">공지사항</a></li>
+				<c:if test="${member != null }">
+					<li><a href="../mypage.do" id="myPage">마이페이지</a></li>
+					<li><a href="../logOut.do">로그아웃</a></li>
+				</c:if>
+				<c:if test="${member == null }">
+					<li><a onclick="../myPageLogin()" id="myPage">마이페이지</a></li>
+					<li><a href="../loginPage.do">로그인</a></li>
+				</c:if>
+			</nav>
+		</header>
+>>>>>>> .r227
+
+		<section class="content">
+			<section class="noticewrite">
+				<div class="page-title">
+					<div class="container">
+						<h3>자유게시판</h3>
+					</div>
+				</div>
+
+				<form action="" id="editor_form" method="post">
+					<div id="div_table">
+						<table>
+							<colgroup>
+								<col width="200">
+								<col width="550">
+							</colgroup>
+							<tr>
+								<td class="td_left">제목</td>
+								<td class="td_right">${freeBoard.freeBoardTitle}</td>
+							</tr>
+							<tr>
+								<td class="td_left">최근등록일자</td>
+								<td class="td_right">${freeBoard.freeBoardModDate ne null ? freeBoard.freeBoardModDate:freeBoard.freeBoardRegDate}</td>
+							</tr>
+							<tr>
+								<td class="td_left">작성자</td>
+								<td class="td_right">${freeBoard.freeBoardWriter}</td>
+							</tr>
+							<tr>
+								<td class="td_left">내용</td>
+								<td class="td_right">
+									<!-- textAread 공백 주의 --> <textarea id="notice_content"
+										name="notice_content" cols="30" rows="10" readonly="readonly">${freeBoard.freeBoardContent}</textarea>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="td_left">첨부파일</td>
+								<td class="td_right" id="file_area">
+									<c:forEach var="free" items="${freeBoard.attaches }" varStatus="st">
+										<div> 파일 ${st.count } <a href="<c:url value='/attach/download/${free.atchNo}'/>" target="_blank">
+												<span class="glyphicon glyphicon-save" aria-hidden="true"></span> ${free.atchOriginalName }
+											</a> Size : ${free.atchFancySize} Down : ${free.atchDownHit}
+										</div> 
+									</c:forEach>
+								</td>
+							</tr>
+							
+							
+						</table>
+					</div>
+					<!-- 버튼 -->
+					<div id="div_button">
+
+						<a href="freeBoardList.do"><i>목록 | </i></a>
+						<c:if test="${memId eq freeBoard.freeBoardWriter }">
+						<a href="freeEdit.do?freeBoardNo=${freeBoard.freeBoardNo }"><i>수정 |  </i></a> 
+						<a href="freeDeletet.do?freeBoardNo=${freeBoard.freeBoardNo }"><i>삭제 | </i></a>
+						</c:if>
+					</div>
+
+	
+				</form>
+<<<<<<< .mine
+||||||| .r224
+=======
+
+>>>>>>> .r227
+		</section>
+	</section>
+	<!-- 댓글 영역                   ----------------------------------------------------------------------------------					 -->
+	<section class="reply_area">
+	<!-- // START : 댓글 등록 영역  -->
+	
+		<div class="panel panel-default">
+			<div class="panel-body form-horizontal">
+				<form id ="DBreplyList" name="frm_reply" action="<c:url value='/reply/replyRegist' />"method="post" >
+					<input type="hidden" name="reBoardNo" value="${freeBoard.freeBoardNo}">
+ 					<input type="hidden" name="reCategory" value="FREE">
+ 					<input	type="hidden" name="reMemId" value="${USER_INFO.userId }">  
+					<input type="hidden" name="reIp"value="<%=request.getRemoteAddr()%>">
+					<input type="checkbox"  id="re_check" name="reSecret" value="Y">secret
+					<div class="form-group">
+						<label class="col-sm-2  control-label">댓글</label>
+						<div class="col-sm-8">
+							<textarea rows="3" name="reContent" class="form-control"></textarea>
+						</div>
+						<div class="col-sm-2">
+							<button id="btn_reply_regist" type="button"class="btn btn-sm btn-info">등록</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+			
+		
+		<!-- // END : 댓글 등록 영역  -->
+
+<!-- DB에서 댓글불러오기  -->
+
+	<div id="id_reply_list_area">
+
+		<c:forEach items="${replyList}" var="replyVo">
+			<!-- 			일반글	 -->
+
+			<c:if test="${replyVo.reSecret eq 'N'}">
+				<c:if test="${replyVo.lv == 1 }">
+					<div class="row" data-reno=${replyVo.reNo }
+					data-recontent=${replyVo.reContent} data-lv='${replyVo.lv}' >
+
+						<div class="col-sm-2 text-left">${replyVo.reWriter }</div>
+						<div class="col-sm-6">
+							<pre>${replyVo.reContent}</pre>
+						</div>
+						<div class="col-sm-2">${replyVo.reRegDate }</div>
+						<div class="col-sm-2 text-right">
+							<button name="btn_reply_edit" type="button"
+								data-bs-target="#id_reply_edit_modal">수정</button>
+
+							<button name="btn_reply_delete" type="button"
+								class="btn btn-sm btn-danger">삭제</button>
+							<button name="btn_re_reply_regist" type="button"
+								data-lv=${replyVo.lv + 1} data-reno=${replyVo.reNo }
+								data-reparentid=${replyVo.reParentId} >대댓글</button>
+						</div>
+						<hr>
+					</div>
+				</c:if>
+
+				<c:if test="${replyVo.lv > 1 }">
+					<div style="margin-left: ${replyVo.lv * 30}px;" class="row"
+						data-reno=${replyVo.reNo }>
+						<div class="col-sm-2 text-left">${replyVo.reWriter }</div>
+						<div class="col-sm-6">
+							<pre> ${replyVo.reContent} </pre>
+						</div>
+						<div class="col-sm-2">${replyVo.reRegDate }</div>
+						<div class="col-sm-2 text-right">
+							<button name="btn_reply_edit" type="button">수정</button>
+							<button name="btn_reply_delete" type="button"
+								class="btn btn-sm btn-danger">삭제</button>
+							<button name="btn_re_reply_regist" type="button">대댓글</button>
+						</div>
+						<hr>
+					</div>
+					
+
+				</c:if>
+			</c:if>
+
+			<!-- 				비밀글 -->
+			<c:if test="${replyVo.reSecret eq 'Y'}">
+				<c:if test="${replyVo.lv == 1 }">
+						  비밀밀글입니다.
+						  <button name="btn_re_reply_regist" type="button">대댓글</button>
+					<hr>
+				</c:if>
+
+				<c:if test="${replyVo.lv > 1 }">
+					<span style="margin-left: ${replyVo.lv * 30}px;"> 비밀글입니다. </span>
+
+					<hr>
+				</c:if>
+			</c:if>
+	
+
+	</c:forEach>
+	</div>
+<!-- 		댓글 더보기 창  -->
+	<c:if test="${not empty replyList}">
+		<div class="row text-center" id="id_reply_list_more">
+			<a id="btn_reply_list_more"
+				class="btn btn-sm btn-default col-sm-10 col-sm-offset-1"> <span
+				class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+				더보기
+			</a>
+		</div>
+	</c:if>
+	<!-- DB에서 댓글불러오기  -->	
+	
+	
+	
+	<!-- START : 댓글 수정용 Modal -->
+	<div class="modal fade" id="id_reply_edit_modal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<form name="frm_reply_edit"
+					action="<c:url value='/reply/replyModify' />" method="post"
+					onclick="return false;">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">×</button>
+						<h4 class="modal-title">댓글수정</h4>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" name="reNo" value="">
+						<textarea rows="3" name="reContent" class="form-control"></textarea>
+						<input type="hidden" name="reMemId" value="${member.memId }">
+					</div>
+					<div class="modal-footer">
+						<button id="btn_reply_modify" type="button"
+							class="btn btn-sm btn-info">저장</button>
+						<button type="button" class="btn btn-default btn-sm"
+							data-dismiss="modal">닫기</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- End : 댓글 수정용 Modal -->
+	
+	
+ 	<!-- START : 대댓글 등록 Modal -->
+	<div class="modal fade" id="id_re_reply_regist_modal" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="modal-content">
+				<form name="frm_re_reply_regist"
+					action="<c:url value='/reply/re_replyRegist' />" method="post"
+					onclick="return false;">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">×</button>
+						<h4 class="modal-title">추가댓글</h4>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" name="reBoardNo" value="${freeBoard.freeBoardNo}">
+<!-- 						<input type="hidden" name="reNo" value=""> -->
+						<input type="hidden" name="lv" value="">
+						<input type="hidden" name="reParentId" value="2">
+						<textarea rows="3" name="reContent" class="form-control rereply"></textarea>
+						<input type="hidden" name="reMemId" value="${member.memId }">
+					</div>
+					<div class="modal-footer">
+						<button id="re_reply_regist" type="button"
+							class="btn btn-sm btn-info">저장</button>
+						<button type="button" class="btn btn-default btn-sm"
+							data-dismiss="modal">닫기</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--End :대댓글 등록Modal -->
+	</section>
+	
+	<!-- 댓글 영역  끄읏   -------------------------------------------------------->
+
+		
+		<%@include file="/WEB-INF/inc/footer.jsp" %>
+
+				
+
+	
+	
+</body>
+<script type="text/javascript">
+//리스트 불러오기
+	let params = {"reBoardNo": "${freeBoard.freeBoardNo}", "curPage": 1 , "rowSizePerPage" : 10};
+
+
+	function new_page(){
+		       location.reload();
+	}
+
+	$(document).ready(function(){  
+		//더보기 버튼
+		 $("#id_reply_list_more").on("click",function(e){
+			e.preventDefault();
+		});
+// 		new_page(); // 처음에 댓글 10개 보여주기
+		 $("#btn_reply_list_more").on("click", function(e){
+			e.preventDefault();
+			new_page();
+		}); 
+	
+	
+
+
+// ----------------------------------------------------------------------------------------------------		----------------------
+		//등록버튼
+		$("#btn_reply_regist").on("click", function(e){
+				e.preventDefault();
+				$form=$(this).closest("form[name='frm_reply']");
+				console.log($form.serialize());
+
+				
+			$.ajax({
+				  url :"<c:url value='/reply/replyRegist.do'/>"
+				, data:  $form.serialize()    //넘어가는 파라미터들을 json 으로 바꿔줌.( reContent, reMemId, reIp, reCategory, reParentNo )
+				, type : "POST"
+				, dataType :"JSON"
+				, success : function(data){
+					console.log('데이터 ', data);
+					alert(data);
+					alert("성공이니");
+ 					$form.find("textarea[name='reContent']").val('');
+ 					$("#id_reply_list_area").html('');
+ 					params.curPage=1;
+ 					new_page();
+ 				console.log($form.serialize());
+					alert(data.re_secret);
+				},error: function(req){
+					alert("실패냐");
+					alert($form);
+					console.log(req.status);
+ 					if(req.status==401){
+						location.href="<c:url value='/login/login.do'/>"; 
+					}
+				}
+	 			});//ajaxd
+		}); // 등록버튼
+// ----------------------------------------------------------------------------------------------------		----------------------
+		// 삭제버튼
+		// btn_reply_delete
+		$("#id_reply_list_area").on("click", 'button[name="btn_reply_delete"]',function(e){
+			e.preventDefault();
+ 			$div=$(this).closest('.row'); //여기서 this = $("#id_reply_list_area")
+
+			$.ajax({
+				url : "<c:url value='/reply/replyDelete.do'/>",
+				type : "POST",
+//   				data :{"reNo": reNo}, //{"reNo" : reNo, "reMemId" : "${USER_INFO.userId}"},
+  				dataType : "JSON",
+				success : function(){
+					$div.remove();
+					alert("성공");
+					console.log("성공이다");
+				},
+				error : function(){
+					alert("실패");
+				}
+			});
+		});
+
+// ----------------------------------------------------------------------------------------------------		----------------------
+
+    	//수정버튼 : 댓글 영역안에 있는 수정버튼만  이벤트 등록 
+		$("#id_reply_list_area").on("click", "button[name='btn_reply_edit']",function(e){
+			$div = $(this).closest(".row");//댓글 div
+			let reNo = $div.data("reno");
+			console.log(reNo);
+// 			let reContent =$div.find("pre").html("");
+			let $modal = $("#id_reply_edit_modal");
+			let $modalForm = $modal.find("form[name='frm_reply_edit']");
+			$modalForm.find("input[name='reNo']").val(reNo);
+ 		 	$("#id_reply_edit_modal textarea[name='reContent']").val($(this).closest($(".row")).data('recontent'));
+			$("#id_reply_edit_modal").modal("show");
+		});  //모달창 띄우고 안에 내용 받아오기 /수정버튼
+		
+		//모달저장 - 수정 눌렀을 때
+		$("#btn_reply_modify").on("click", function(e){
+			console.log($("form[name='frm_reply_edit']")[0]);
+			$.ajax({
+				url : "<c:url value='/reply/replyModify.do'/>",
+				data : $("form[name='frm_reply_edit']").serialize(),
+				success: function(data){
+					console.log(data);
+					$("#id_reply_list_area").html('');
+ 					params.curPage=1;
+  					new_page();
+					 $('#id_reply_edit_modal').modal("hide");
+				},
+				error : function(req){
+					console.log(req);
+				}
+			});
+		});// 모달 저장
+// ----------------------------------------------------------------------------------------------------		----------------------
+				
+		// 대댓글 버튼 : 이벤트 등록 
+		$("#id_reply_list_area").on("click", 'button[name="btn_re_reply_regist"]' , function(e){
+// 		console.log($("form[name='frm_re_reply_regist']")[0]);
+			$('#id_re_reply_regist_modal').modal();
+			// 대댓글 모달창 뜨기
+			$("#re_reply_regist").on("click", function(){
+				e.preventDefault();
+			//상위댓글의 요소 가져오기
+
+	 		let cur_reply = e.target.closest(".row"); 
+			console.log(cur_reply, "cur_reply");
+	 		let rereNo = cur_reply.getAttribute("data-reno");
+	 		let lv = cur_reply.getAttribute("data-lv");
+	 		lv = Number(lv)+1;
+	 		console.log(lv, "lv");
+	 		console.log(rereNo, "reParentNo");
+	 		let content = $(".rereply").val();
+	 		let relv  = $("input[name='lv']").val(lv);
+ 		 	let reParentId =$("input[name='reParentId']").val(rereNo);
+ 		 	
+			$.ajax({
+				url : "<c:url value='/reply/replyRegist.do'/>", // 컨트롤러만들기 
+				data :  $("form[name='frm_re_reply_regist']").serialize(),
+				success: function(data){
+					console.log(data);
+					$btn=$(this);
+					$div=$btn.closest('div.row');
+					$modal =$("id_re_reply_regist_modal");
+ 					$modal.find("textarea[name='reContent']").val(content);
+// 					$modal.find('input[name=reNo]').val(reNo);
+					$modal.find('input[name=lv]').val(relv);
+					$modal.find('input[name=reParentId]').val(reParentId);
+					$("#id_reply_list_area").html('');
+					
+					params.curPage=1;
+ 					new_page();
+					 $('#id_re_reply_regist_modal').modal("hide");
+				},
+				error : function(req){
+					console.log(req);
+				}
+			});
+		});
+	}); // 대댓글 저장
+		
+		
+	}); // document
+
+</script>
+
+</html>

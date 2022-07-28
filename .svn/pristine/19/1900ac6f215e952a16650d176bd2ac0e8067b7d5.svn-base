@@ -1,0 +1,29 @@
+package com.babpool.member.vo;
+
+public class FavoriteMemberVO {
+	private String memId;                   
+	private String favMemid;                
+	
+	@Override
+	public String toString() {
+		return "FavoriteMemberVO [memId=" + memId + ", favMemid=" + favMemid + "]";
+	}
+
+	public String getMemId() {
+		return memId;
+	}
+
+	public void setMemId(String memId) {
+		this.memId = memId;
+	}
+
+	public String getFavMemid() {
+		return favMemid;
+	}
+
+	public void setFavMemid(String favMemid) {
+		this.favMemid = favMemid;
+	}
+	
+
+}

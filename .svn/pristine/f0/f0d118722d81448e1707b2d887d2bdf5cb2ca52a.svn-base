@@ -1,0 +1,40 @@
+package com.babpool.food.vo;
+
+public class RecommendVO {
+	private String memberId;                
+	private int foodNo;                     
+	private String recommendDate;           
+	private String recommendScore;
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	public int getFoodNo() {
+		return foodNo;
+	}
+	public void setFoodNo(int foodNo) {
+		this.foodNo = foodNo;
+	}
+	public String getRecommendDate() {
+		return recommendDate;
+	}
+	public void setRecommendDate(String recommendDate) {
+		this.recommendDate = recommendDate;
+	}
+	public String getRecommendScore() {
+		return recommendScore;
+	}
+	public void setRecommendScore(String recommendScore) {
+		this.recommendScore = recommendScore;
+	}
+	@Override
+	public String toString() {
+		return "RecommendVO [memberId=" + memberId + ", foodNo=" + foodNo + ", recommendDate=" + recommendDate
+				+ ", recommendScore=" + recommendScore + "]";
+	}
+	
+	
+	
+}

@@ -1,0 +1,76 @@
+package com.babpool.attach.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import com.babpool.attach.dao.IAttachDao;
+import com.babpool.attach.vo.AttachVO;
+import com.babpool.exception.BizNotEffectedException;
+import com.babpool.exception.BizNotFoundException;
+import com.babpool.exception.BizPasswordNotMatchedException;
+import com.babpool.free.dao.IFreeBoardDao;
+import com.babpool.free.vo.FreeBoardVO;
+
+@Service
+public class AttachServiceImpl implements IAttachService{
+	
+	@Inject
+	private IAttachDao attachDao;
+	@Inject
+	private IFreeBoardDao freeBoardDao;
+
+	@Override
+	public AttachVO getAttach(int atchNo) throws BizNotFoundException {
+		AttachVO vo = attachDao.getAttach(atchNo);
+		System.out.println("service AttachVO"+vo);
+		if (vo == null) {
+			throw new BizNotFoundException("첨부파일 [" + atchNo + "]에 대한 조회 실패");
+		}
+		return vo;
+	}
+	
+	@Override
+	public void increaseDownHit(int atchNo) throws BizNotEffectedException {
+		int cnt=attachDao.increaseDownHit(atchNo);
+		if(cnt==0) throw new BizNotEffectedException();
+	}
+	
+
+	public void modifyBoard(FreeBoardVO freeBoard)
+			throws BizNotFoundException, BizPasswordNotMatchedException, BizNotEffectedException {
+		FreeBoardVO vo = freeBoardDao.getFreeBoard(freeBoard.getFreeBoardNo());
+		// vo는 DB에 있는 데이터
+		if (vo == null)
+			throw new BizNotFoundException();
+		if (freeBoard.getFreeBoardPass().equals(vo.getFreeBoardPass())) {
+			int cnt = freeBoardDao.updateBoard(freeBoard);
+			if (cnt == 0)
+				throw new BizNotEffectedException();
+            //추가한 첨부파일 insert
+			List<AttachVO> attaches= freeBoard.getAttaches();
+			if(attaches !=null) {
+				for(AttachVO attach : attaches) {
+					attach.setAtchParentNo(freeBoard.getFreeBoardNo());
+					attachDao.insertAttach(attach);
+				}
+			}
+			
+			// 휴지통버튼 누른 첨부파일들 DB에서 삭제
+			int delAtchNos[] = freeBoard.getDeAttchNos(); // 애초에 파라미터로 올때 세팅이됩니다.
+			if (delAtchNos != null && delAtchNos.length >0) {
+				attachDao.deleteAttaches(delAtchNos);  
+			}
+			
+		} else {
+			throw new BizPasswordNotMatchedException();
+		}
+
+	}
+	
+	
+	
+	
+}
